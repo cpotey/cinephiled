@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 // import history from '../actions/history';
 
 
-import SearchIcon from '../assets/svg/search.svg';
+// import SearchIcon from '../assets/svg/search.svg';
+
+import SearchButton from './SearchButton';
 
   const SearchForm = () => {
   
   const [input, setInput] = useState('');
+  // const [state, setState] = useState('');
 
   function onFormSubmit(e) {
     e.preventDefault();
@@ -26,21 +29,25 @@ import SearchIcon from '../assets/svg/search.svg';
     // history.push(`${process.env.PUBLIC_URL}/search/${input}`);
   }
 
+  function onInputChange(e) {
+
+    setInput(e.target.value)
+    
+  }
  
   
     return (
      
       <form onSubmit={onFormSubmit}>
         <input
-          onChange={e => setInput(e.target.value)}
+          onChange={onInputChange}
           id="searchInput"
           type="text"
           placeholder="Search for a movie..."
           value={input}
           autoComplete="off"
         />
-        {/* <input type="submit" value="Submit" /> */}
-        <button className="searchIcon" type="submit" onClick={onFormSubmit}><img alt="Search" src={SearchIcon} /></button>
+        <button className={"searchIcon " + (input ? 'active' : 'inactive')} type="submit" onClick={onFormSubmit}><SearchButton /></button>
       </form>
 
 
