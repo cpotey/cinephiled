@@ -1,46 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.scss';
+import history from '../actions/history';
 
-import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom"
+import { Router, Switch, Route, Redirect } from "react-router-dom"
 
-import { searchMovies } from '../actions/index';
-
-import SearchForm from '../components/SearchForm'
+import SiteHeader from '../components/SiteHeader'
+import Footer from '../components/Footer'
 
 import Movie from './Movie'
 import Search from './Search'
 import Discover from './Discover'
 
-class App extends Component {
 
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   query: ''
-    // }    
-    this.searchMovies = searchMovies.bind(this);
-  }
+const App = () => {
 
-
-  render() {
-    
     return (
+
+      <Router history={history}>
       <div id="app">
 
-        <header id="header">
-          <a href={process.env.PUBLIC_URL + '/'}>
-          Home</a>
-          <SearchForm />
-        </header>
+        <SiteHeader />
 
         <div id="page">
 
-          <aside id="sidebar">
-            <p>Sidebar</p>
-          </aside>
-
           <section id="main-content">
-            <BrowserRouter>
+            
                 <Switch>
                     <Route
                       path={process.env.PUBLIC_URL + '/'}
@@ -56,14 +40,18 @@ class App extends Component {
                     <Route path={process.env.PUBLIC_URL + '/movie/:id'} exact component={Movie} />
                     <Route path={process.env.PUBLIC_URL + '/discover/'} component={Discover} />
                 </Switch>
-            </BrowserRouter>
+            
           </section>
 
         </div>
 
+        <Footer />
+
       </div>
+      </Router>
+
     );
-  }
+  
 
 }
 

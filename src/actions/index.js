@@ -1,4 +1,7 @@
 import API from './api';
+import React from 'react';
+
+// import history from '../actions/history';
 
 export const getMovie = function getMovie(query) {
 
@@ -7,35 +10,65 @@ export const getMovie = function getMovie(query) {
         this.setState({
             activeMovie: response.data
         })
-        // console.log(this.state)
     })
     .catch(error => {
         console.log(error);
+        return (
+            <div id="error">
+                <p>test</p>
+            </div>
+        )
     });
 
-    
 };
 
-export const searchMovies = function searchMovies(query,page) {
 
-    API.get(`/search/movie`, {
-        params: {
-            query:query,
-            page: page,
-        },
-    })
-    .then(response => {
+// export function searchMovies(query,page) {
 
-        this.setState({
-            searchResults: response.data
-        })
+//     console.log('do function')
+
+//     API.get(`/search/movie`, {
+//         params: {
+//             query:query,
+//             page: page,
+//         },
+//     })
+//     .then(response => {
+
+//         // this.setState({
+//         //     searchResults: response.data
+//         // })
+//         console.log(`new search completed for '${query}'`)
+//         return response.data;
         
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        
+//     })
+//     .catch(error => {
+//         console.log(error); 
+//     });
 
-};
+
+// };
+
+export function searchMovies(query,page) {
+  
+    return API
+        .get(`/search/movie`, {
+            params: {
+                query:query,
+                page: page,
+            },
+        })
+        .then(response => {
+            this.setState({
+                searchResults: response.data
+            })
+            return response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 
 export const discoverMovies = function discoverMovies(query,page) {
 
@@ -57,3 +90,4 @@ export const discoverMovies = function discoverMovies(query,page) {
     });
 
 };
+

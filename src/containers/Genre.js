@@ -1,8 +1,8 @@
 import React from 'react';
-import { discoverMovies } from '../actions/index';
+import { discoverMovies, getGenres } from '../actions/index';
 import MoviesList from '../components/MoviesList';
 
-class Discover extends React.Component {
+class Genre extends React.Component {
 
     constructor(){
         super();
@@ -10,6 +10,7 @@ class Discover extends React.Component {
             searchResults: []
         }
         this.discoverMovies = discoverMovies.bind(this);
+        this.getGenres = getGenres.bind(this);
         
     }
 
@@ -23,6 +24,9 @@ class Discover extends React.Component {
 
         // Do the search function
         this.discoverMovies(query,page)
+
+        this.getGenres();
+
     }
 
     render() {
@@ -32,8 +36,9 @@ class Discover extends React.Component {
         return (
    
             <MoviesList movieResults={movieResults} />
+            
         )
     }
 }
 
-export default Discover
+export default Genre

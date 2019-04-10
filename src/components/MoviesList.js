@@ -5,8 +5,8 @@ import Pagination from './Pagination'
 const MoviesList = (props) => {
 
     const movieResults = props.movieResults.results;
-    console.log(props.movieResults)
     const fullResult = props.movieResults;
+    const searchQuery = props.searchQuery;
 
     const scrollToMyRef = () => {
       window.scrollTo({
@@ -17,19 +17,20 @@ const MoviesList = (props) => {
 
     return (
 
-      <section id="wrapper">
-      
+      <section key={searchQuery}>
+        <div id="wrapper">
         {movieResults ? (
           movieResults.map(movie => (
             <MovieTile key={movie.id} data={movie}/>
           ))
         ) : ( "" )}
-        <Pagination fullResult={fullResult} scrollToMyRef={scrollToMyRef}/>
-
+        </div>
+        <Pagination key={searchQuery} fullResult={fullResult} scrollToMyRef={scrollToMyRef}/>
       </section>
+      
 
     );
-  // }
+    
 }
   
 export default MoviesList;
